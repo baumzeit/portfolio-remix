@@ -1,0 +1,105 @@
+.voronoi {
+  .bounds {
+    stroke-width: 2;
+    @apply stroke-bg-primary;
+  }
+
+  .cell {
+    opacity: 1;
+    .pattern {
+      fill-opacity: 0.9;
+      transition: fill-opacity 50ms ease-out;
+    }
+    .highlight-pattern {
+      fill-opacity: 0;
+      transition: fill-opacity 50ms ease-out;
+    }
+    .cell-gap {
+      stroke-width: 22;
+      @apply stroke-bg-primary;
+      transition: stroke-width 100ms ease-out;
+    }
+    .cell-border {
+      stroke-width: 1;
+      fill: transparent;
+      @apply stroke-brandLight;
+      transform-origin: center;
+    }
+    .image {
+      transform-origin: center;
+      transform: scale(1);
+      @apply opacity-95 dark:opacity-80;
+
+      transition: transform 125ms ease-out, opacity 50ms ease-out;
+
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .annotation {
+      transition: opacity 20ms ease-out;
+
+      .label {
+        text-anchor: middle;
+        dominant-baseline: central;
+        @apply fill-bg-primary;
+        @apply font-body md:text-sm xl:text-lg;
+      }
+      .label-box,
+      .focus-dot {
+        @apply fill-text-primary;
+        fill-opacity: 0.8;
+      }
+    }
+
+    &.hover-selected {
+      .pattern {
+        fill-opacity: 0.15;
+        transition: fill-opacity 100ms ease-out;
+      }
+      .highlight-pattern {
+        fill-opacity: 0;
+      }
+      .cell-gap {
+        stroke-width: 20;
+        transition: stroke-width 200ms ease-out;
+      }
+      .image {
+        opacity: 1;
+        transform: scale(1.012);
+        transition: transform 250ms ease-out, opacity 100ms ease-out;
+      }
+    }
+  }
+
+  &.highlight-view {
+    .cell {
+      .image {
+        transition: transform 250ms ease-out, opacity 50ms ease-out;
+        @apply opacity-30 dark:opacity-20;
+      }
+
+      .annotation {
+        transition: opacity 25ms ease-out;
+        opacity: 0;
+      }
+
+      &.area-highlight {
+        .image {
+          transition: transform 250ms ease-out, opacity 50ms ease-out;
+          opacity: 1;
+        }
+        .highlight-pattern {
+          transition: fill-opacity 50ms ease-out;
+          fill-opacity: 0.95;
+        }
+        .annotation {
+          transition: opacity 50ms ease-out;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
